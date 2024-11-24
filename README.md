@@ -1,62 +1,59 @@
-# DataHarbor
-
-DataHarbor is a lightweight, containerized data engineering platform inspired by Databricks. It provides functionalities for managing notebooks, workflows, metadata, and Spark clusters.
+## What is DataHarbor?
+DataHarbor is a lightweight, containerized data engineering platform inspired by Databricks. It enables users to manage notebooks, metadata, workflows, and clusters in a seamless environment. Built entirely using Docker, it provides an affordable, scalable, and modular alternative for small teams, data enthusiasts, and developers to collaborate and process big data effectively.
 
 ## Features
-- Notebook management (.ipynb, .py, .sql support)
-- PostgreSQL metadata storage
-- Spark cluster management
-- Workflow creation and execution
+### Workspace:
+- A central place to create, edit, and manage Python notebooks with support for `.py`, `.ipynb`, and `.sql` file formats. Includes import/export functionality.
+
+### Metadata Management:
+- Store notebook metadata, workflow details, and execution history using PostgreSQL.
+
+### Workflow Orchestration:
+- Create and schedule jobs from notebooks. Define cluster configurations (CPU, RAM) for efficient processing.
+
+### Dynamic Clusters:
+- Spin up Spark clusters dynamically in isolated Docker containers for running notebooks.
+
+---
+
+## Why Use DataHarbor?
+- **Lightweight and Portable**: Perfect for small teams and personal projects.
+- **Fully Containerized**: No need for manual installations; all dependencies are bundled.
+- **Customizable**: Modify, extend, and integrate with your own workflows.
+- **Learning Platform**: Ideal for understanding containerized data processing and orchestration.
+
+---
 
 ## Tech Stack
-- **Backend**: Flask
-- **Frontend**: React.js
-- **Database**: PostgreSQL
-- **Big Data**: Apache Spark
-- **Containerization**: Docker & Docker Compose
+- **Frontend**: React.js - For an interactive and user-friendly web interface.
+- **Backend**: Flask (Python) - Manages API routes, notebook operations, and job scheduling.
+- **Database**: PostgreSQL - Stores metadata, job details, and execution history.
+- **Big Data Processing**: Apache Spark with PySpark - For scalable data transformations and analysis.
+- **Containerization**: Docker - Ensures portability and consistency across environments.
+- **Orchestration**: Docker Compose - Manages interdependent services (frontend, backend, database, and clusters).
 
-## Getting Started
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/DataHarbor.git
-   cd DataHarbor
+---
 
-## Project Structure 
-
+## Project Structure
+```plaintext
 DataHarbor/
-├── backend/
-│   ├── app.py
-│   ├── routes/
-│   │   ├── __init__.py
-│   │   ├── notebooks.py
-│   │   ├── metadata.py
-│   │   ├── workflow.py
-│   │   └── clusters.py
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── notebook.py
-│   │   ├── job.py
-│   │   └── cluster.py
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── db.py
-│   │   └── config.py
-│   ├── requirements.txt
-│   └── Dockerfile
-├── db/
-│   ├── init.sql
-│   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   │   ├── App.js
-│   │   ├── components/
-│   │   ├── services/
-│   │   └── styles/
-│   ├── public/
-│   │   └── index.html
-│   ├── package.json
-│   └── Dockerfile
-├── notebooks/
-│   └── sample.ipynb
-├── docker-compose.yml
-└── README.md
+├── backend/             # Backend API with Flask
+│   ├── app.py           # Main application entry point
+│   ├── routes/          # Modular Flask routes
+│   ├── models/          # Database models
+│   ├── utils/           # Helper functions
+│   ├── requirements.txt # Python dependencies
+│   └── Dockerfile       # Backend container setup
+├── db/                  # Database setup
+│   ├── init.sql         # PostgreSQL initialization script
+│   └── Dockerfile       # Database container setup
+├── frontend/            # Frontend app with React.js
+│   ├── src/             # React app source code
+│   ├── public/          # Public assets
+│   ├── package.json     # Frontend dependencies
+│   └── Dockerfile       # Frontend container setup
+├── notebooks/           # Jupyter notebooks
+│   └── sample.ipynb     # Placeholder for user uploads
+├── docker-compose.yml   # Compose services
+└── README.md            # Project documentation
+```
