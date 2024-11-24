@@ -1,18 +1,23 @@
-from flask import request, jsonify
-from . import clusters_blueprint
+from flask import Blueprint, jsonify, request
 
-@clusters_blueprint.route('/clusters', methods=['GET'])
-def list_clusters():
-    # Placeholder for listing clusters
-    return jsonify({"message": "List of clusters"})
+# Define the Blueprint for clusters
+clusters_bp = Blueprint('clusters', __name__)
 
-@clusters_blueprint.route('/clusters', methods=['POST'])
-def create_cluster():
-    data = request.get_json()
-    # Placeholder for creating a cluster
-    return jsonify({"message": "Cluster created", "data": data})
+# Dummy clusters data
+clusters = [
+    {"id": 1, "name": "Cluster A", "status": "Active"},
+    {"id": 2, "name": "Cluster B", "status": "Inactive"}
+]
 
-@clusters_blueprint.route('/clusters/<cluster_id>', methods=['DELETE'])
-def delete_cluster(cluster_id):
-    # Placeholder for deleting a cluster
-    return jsonify({"message": f"Cluster {cluster_id} deleted"})
+# Route to fetch all clusters
+@clusters_bp.route('/clusters', methods=['GET'])
+def get_all_clusters():
+    return jsonify({"clusters": clusters}), 200
+
+# Route to fetch a specific cluster by ID
+@clusters_bp.route('/clusters/<int:cluster_id>', methods=['GET'])
+def get_cluster_by_id(cluster_id):
+    cluster = next((cl for cl in clusters if cl["id"] == cluster_id), None)
+    if cluster:
+        return jsonify(cluster), 200
+    return jsonify({"error": "Cluster not found"}), 404

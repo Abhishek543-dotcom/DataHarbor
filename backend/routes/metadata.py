@@ -1,18 +1,16 @@
-from flask import request, jsonify
-from . import metadata_blueprint
+from flask import Blueprint, jsonify
 
-@metadata_blueprint.route('/metadata', methods=['GET'])
-def list_metadata():
-    # Placeholder for listing metadata
-    return jsonify({"message": "List of metadata entries"})
+# Define the Blueprint for metadata
+metadata_bp = Blueprint('metadata', __name__)
 
-@metadata_blueprint.route('/metadata', methods=['POST'])
-def create_metadata():
-    data = request.get_json()
-    # Placeholder for creating metadata
-    return jsonify({"message": "Metadata entry created", "data": data})
+# Dummy metadata information
+metadata_info = {
+    "app_name": "DataHarbor",
+    "version": "1.0.0",
+    "description": "A data management platform for notebooks, workflows, and clusters."
+}
 
-@metadata_blueprint.route('/metadata/<metadata_id>', methods=['GET'])
-def get_metadata(metadata_id):
-    # Placeholder for fetching a specific metadata entry
-    return jsonify({"message": f"Details of metadata {metadata_id}"})
+# Route to fetch metadata
+@metadata_bp.route('/metadata', methods=['GET'])
+def get_metadata():
+    return jsonify(metadata_info), 200

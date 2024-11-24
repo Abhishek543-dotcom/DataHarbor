@@ -1,4 +1,4 @@
-CREATE DATABASE dataharbor;
+CREATE OR REPLACE DATABASE dataharbor;
 
 CREATE TABLE notebooks (
     id SERIAL PRIMARY KEY,

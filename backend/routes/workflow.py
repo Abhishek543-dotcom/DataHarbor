@@ -1,18 +1,23 @@
-from flask import request, jsonify
-from . import workflow_blueprint
+from flask import Blueprint, jsonify, request
 
-@workflow_blueprint.route('/workflows', methods=['GET'])
-def list_workflows():
-    # Placeholder for listing workflows
-    return jsonify({"message": "List of workflows"})
+# Define the Blueprint for workflows
+workflow_bp = Blueprint('workflow', __name__)
 
-@workflow_blueprint.route('/workflows', methods=['POST'])
-def create_workflow():
-    data = request.get_json()
-    # Placeholder for creating a workflow
-    return jsonify({"message": "Workflow created", "data": data})
+# Dummy workflows data
+workflows = [
+    {"id": 1, "name": "ETL Pipeline", "status": "Completed"},
+    {"id": 2, "name": "Data Cleaning", "status": "In Progress"}
+]
 
-@workflow_blueprint.route('/workflows/<workflow_id>', methods=['GET'])
-def get_workflow(workflow_id):
-    # Placeholder for fetching a specific workflow
-    return jsonify({"message": f"Details of workflow {workflow_id}"})
+# Route to fetch all workflows
+@workflow_bp.route('/workflows', methods=['GET'])
+def get_all_workflows():
+    return jsonify({"workflows": workflows}), 200
+
+# Route to fetch a specific workflow by ID
+@workflow_bp.route('/workflows/<int:workflow_id>', methods=['GET'])
+def get_workflow_by_id(workflow_id):
+    workflow = next((wf for wf in workflows if wf["id"] == workflow_id), None)
+    if workflow:
+        return jsonify(workflow), 200
+    return jsonify({"error": "Workflow not found"}), 404

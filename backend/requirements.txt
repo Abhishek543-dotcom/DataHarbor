@@ -3,3 +3,4 @@ flask-restful
 flask-sqlalchemy
 psycopg2-binary
 nbformat
+flask_cors
